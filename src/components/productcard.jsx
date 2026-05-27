@@ -1,11 +1,12 @@
 import { Link } from "react-router-dom";
-export default function productcard ({ product }) {
+export default function productcard({ product }) {
   return (
-    <div
-      className="bg-white rounded-lg overflow-hidden shadow-md  transition-all duration-200 hover:-translate-y-1 hover:shadow-xl"
-      
-    >
-      <img className="w-full h-64 object-cover" src={product.image} />
+    <div className="bg-white rounded-lg overflow-hidden shadow-md  transition-all duration-200 hover:-translate-y-1 hover:shadow-xl">
+      <img
+        className="w-full h-64 object-cover"
+        src={product.image}
+        alt={product.name}
+      />
       <div className="m-4 space-y-2">
         <div className="space-y-2">
           <h3 className="text-2xl text-gray-800">{product.name}</h3>
