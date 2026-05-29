@@ -1,8 +1,8 @@
 import { ScanLine } from "lucide-react";
 import { useForm } from "react-hook-form";
-import { useContext, useState } from "react";
+import { useState } from "react";
 import { Link } from "react-router-dom";
-import { AuthContext } from "../context/AuthContext";
+import { useAuth } from "../context/AuthContext";
 import { useNavigate } from "react-router-dom";
 export default function Auth() {
   const [mode, setMode] = useState("signup");
@@ -10,7 +10,7 @@ export default function Auth() {
 
   const navigate = useNavigate();
 
-  const { signup, user, logout, login } = useContext(AuthContext);
+  const { signup, login } = useAuth();
 
   const {
     register,
@@ -32,17 +32,12 @@ export default function Auth() {
     } else {
       setError(result.error);
     }
-    console.log(result);
   }
 
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-2 flex items-center justify-center">
       <div className=" max-w-7xl w-72 bg-white p-4 shadow-md">
         <div className="">
-          {user && <p className="text-sm">User logged in: {user.email} </p>}
-          <button onClick={() => logout()} className="bg-red-200">
-            logout
-          </button>
           <h1 className="text-2xl font-semibold mb-8 text-gray-800">
             {mode === "signup" ? "Sign up" : "Login"}
           </h1>
@@ -123,7 +118,7 @@ export default function Auth() {
           <div className="text-center text-sm">
             {mode === "signup" ? (
               <p>
-                Already have an acount?{" "}
+                Already have an account?{" "}
                 <span>
                   <Link
                     onClick={() => setMode("login")}
@@ -135,7 +130,7 @@ export default function Auth() {
               </p>
             ) : (
               <p>
-                Don't have an acount?{" "}
+                Don't have an account?{" "}
                 <span>
                   <Link
                     onClick={() => setMode("signup")}

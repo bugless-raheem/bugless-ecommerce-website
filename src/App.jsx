@@ -5,6 +5,7 @@ import Auth from "./pages/Auth";
 import Checkout from "./pages/Checkout";
 import Navbar from "./components/Navbar";
 import AuthProvider from "./context/AuthContext";
+import ProductDetails from "./pages/ProductDetails";
 
 function App() {
   return (
@@ -18,8 +19,9 @@ function App() {
             <Route path="/" element={<Home />} />
             <Route path="/auth" element={<Auth />} /> {/* Fixed: added / */}
             <Route path="/checkout" element={<Checkout />} />{" "}
+            <Route path="/products/:id" element={<ProductDetails />} />
             {/* Fixed: added / */}
-            <Route path="*" element={<h1>404 not found</h1>} />
+            {/* <Route path="*" element={<h1>404 not found</h1>} /> */}
           </Routes>
         </main>
       </div>
