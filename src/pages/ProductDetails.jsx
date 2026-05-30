@@ -1,11 +1,13 @@
 import { useNavigate, useParams } from "react-router-dom";
 import { getProductById } from "../data/products";
 import { useEffect } from "react";
+import { useCart } from "../context/CartContext";
 
 export default function ProductDetails() {
   const { id } = useParams();
   const product = getProductById(id);
   const navigate = useNavigate();
+  const { addToCart, cartItems } = useCart();
 
   useEffect(() => {
     const foundProduct = getProductById(id);
@@ -18,6 +20,12 @@ export default function ProductDetails() {
   if (!product) {
     return <div>Product not found.</div>;
   }
+
+  const ProductInCart = cartItems.find((item) => item.id === product.id);
+
+  const productQuantityLabel = ProductInCart
+    ? `(${ProductInCart.quantity})`
+    : "";
 
   return (
     <div className="max-w-6xl mx-auto px-4 py-12">
@@ -35,10 +43,12 @@ export default function ProductDetails() {
             ${product.price}
           </p>
           <p className="text-gray-700 mb-6">{product.description}</p>
-          <button className="px-6 py-3 bg-blue-700 text-white rounded-md hover:bg-blue-600">
-            Add to cart
+          <button
+            onClick={() => addToCart(product.id)}
+            className="px-6 py-3 bg-blue-700 text-white rounded-md hover:bg-blue-600"
+          >
+            Add to cart {productQuantityLabel}
           </button>
-          
         </div>
       </div>
     </div>
